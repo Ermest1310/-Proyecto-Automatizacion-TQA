@@ -1,0 +1,7 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{evaluate}=require('../platform/readiness.cjs');
+const base=()=>({policy:{blockingSeverities:['critical','high'],minimumStableSamples:3,requireLiveEnvironment:true},coverageBlocked:[],required:[{caseId:'QA-CRITICAL',project:'chromium',status:'PASS',samples:3,flaky:false,runId:'unit-proof'}],defects:[],liveReady:true});
+test('lista solo cuando todos los criterios verificables se cumplen',()=>{const r=evaluate(base());assert.equal(r.decision,'LISTA');assert(r.rules.every(r=>r.state==='pass'));assert(r.inputIntegrity);});
+test('fallos, bloqueo de cobertura, defectos altos e infraestructura bloquean entrega',()=>{for(const change of [x=>x.required[0].status='NOT_RUN',x=>x.coverageBlocked.push('TC-34 parcial'),x=>x.defects.push({id:'D',status:'fixed',severity:'high'}),x=>x.liveReady=false,x=>x.required[0].flaky=true]){const input=base();change(input);assert.equal(evaluate(input).decision,'BLOQUEADA');}});
+test('muestras insuficientes o defecto menor requieren revisión sin aprobar automáticamente',()=>{let input=base();input.required[0].samples=1;assert.equal(evaluate(input).decision,'REQUIERE REVISIÓN');input=base();input.defects=[{id:'D',status:'open',severity:'low'}];assert.equal(evaluate(input).decision,'REQUIERE REVISIÓN');});
+
+test('ausencia total de resultados nunca habilita una entrega',()=>{const input=base();input.required=[];assert.equal(evaluate(input).decision,'BLOQUEADA');});

@@ -1,0 +1,3 @@
+base_url_env: APP_URL
+username_env: QA_DEMO_USERNAME
+password_env: QA_DEMO_PASSWORD

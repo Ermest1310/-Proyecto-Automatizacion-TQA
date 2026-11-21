@@ -1,0 +1,48 @@
+{
+  "name": "qa-automation",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Sistema de automatización de pruebas y QA para el Proyecto2 (Laravel)",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "qa:backend": "node backend/server.cjs",
+    "qa:app": "node scripts/start-qa-app.cjs",
+    "qa:run": "node backend/cli.cjs",
+    "qa:audit-db": "node scripts/audit-databases.cjs",
+    "qa:catalog": "node scripts/validate-catalog.cjs",
+    "qa:test-backend": "node --test backend/tests/*.test.cjs",
+    "qa:secrets-check": "node scripts/check-secrets.cjs",
+    "qa:performance": "playwright test --config playwright.performance.config.ts",
+    "qa:export": "node scripts/generate-reports.cjs",
+    "qa:inbox": "node scripts/local-inbox.cjs",
+    "qa:demo": "playwright test --config playwright.demo.config.ts",
+    "qa:start": "node scripts/stack.cjs start",
+    "qa:stop": "node scripts/stack.cjs stop",
+    "qa:status": "node scripts/stack.cjs status",
+    "qa:doctor": "node scripts/doctor.cjs",
+    "qa:test-plan": "playwright test tests/plan/plan.spec.ts --project=chromium",
+    "qa:configure": "node scripts/configure-platform.cjs",
+    "qa:configure-gmail": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/configure-gmail-smtp.ps1",
+    "qa:verify": "node scripts/verify-platform.cjs",
+    "qa:test-mysql-fixtures": "node scripts/test-mysql-fixtures.cjs",
+    "qa:test-pom": "node --test tests/pom/platform.pom-check.cjs",
+    "qa:configure-gemini": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/configure-gemini.ps1",
+    "qa:ai:check": "node scripts/check-gemini.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^26.6.6",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "mailparser": "3.14.5",
+    "nodemailer": "10.6.0",
+    "smtp-server": "3.21.6"
+  }
+}

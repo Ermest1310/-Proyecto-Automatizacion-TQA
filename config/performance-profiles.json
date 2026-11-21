@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "targetPath": "/login",
+  "hardLimits": {"maxConcurrency":3,"maxRequests":40,"maxRps":4,"maxDurationMs":25000,"requestTimeoutMs":5000,"maxBodyBytes":262144},
+  "profiles": [
+    {"id":"QA-PERF-001","name":"Latencia base de lectura","concurrency":1,"requests":10,"maxRps":2,"maxDurationMs":12000,"p95BudgetMs":1500,"maxErrorRate":0},
+    {"id":"QA-LOAD-001","name":"Carga ligera de lectura","concurrency":3,"requests":24,"maxRps":4,"maxDurationMs":18000,"p95BudgetMs":2500,"maxErrorRate":0.01},
+    {"id":"QA-PERF-002","name":"Estabilidad corta de lectura","concurrency":2,"requests":30,"maxRps":2,"maxDurationMs":22000,"p95BudgetMs":2000,"maxErrorRate":0.01,"maxDegradationRatio":2,"degradationAllowanceMs":100}
+  ]
+}
