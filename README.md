@@ -1,9 +1,11 @@
 # QA Automation — Proyecto2 (Laravel)
 
+Proyecto de automatización de pruebas para la asignatura de **Testing y Quality Assurance (TQA)**: suites Playwright/TypeScript, backend de ejecución en Node y validaciones PHPUnit sobre una instancia Laravel aislada.
+
 ## Arranque y cobertura vigentes
 
 ```powershell
-cd E:\qa
+npm install
 npm run qa:start
 ```
 
